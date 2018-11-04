@@ -1,0 +1,8 @@
+{
+    "name": "munkireport/caching",
+    "description": "Caching module for munkireport.",
+    "license": "MIT",
+    "require": {
+        "php":"^7.0"
+    }
+}
