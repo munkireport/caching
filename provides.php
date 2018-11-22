@@ -1,5 +1,8 @@
 <?php
 
+// Add local config
+configAppendFile(__DIR__ . '/config.php');
+
 if (!conf('caching_show_itemized')) {
 
     return array(

@@ -81,3 +81,16 @@ The results are stored in the table:
 * totalbytesstoredfromparents - Total number of bytes stored from parents
 * totalbytesstoredfrompeers - Total number of bytes stored from peers
 * reachability - IP address and port of caching servers that clients can reach
+
+Configuration
+-------------
+
+Legacy Caching Listing
+
+Starting with 10.13, Apple changed the caching server. In MunkiReport,
+you can hide the legacy caching server listing that shows an itemized
+listing for all caching server transactions for caching servers running
+10.8-10.12. To hide the "Caching (Legacy)" listing, set this to FALSE.
+```
+CACHING_SHOW_ITEMIZED=FALSE
+```
