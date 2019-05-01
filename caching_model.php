@@ -82,7 +82,7 @@ class Caching_model extends \Model
                 ".get_machine_group_filter()."
                 GROUP BY reachability
                 ORDER BY count DESC";
-        
+        $out = [];
         foreach ($this->query($sql) as $obj) {
             if ("$obj->count" !== "0") {
                 $obj->reachability = $obj->reachability ? $obj->reachability : 'Unknown';
