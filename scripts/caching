@@ -8,6 +8,9 @@ fi
 
 # OS check
 OSVERSION=$(/usr/bin/sw_vers -productVersion | /usr/bin/cut -d . -f 2)
+CWD=$(dirname $0)
+CACHEDIR="$CWD/cache/"
+
 
 # If OS version is 10.7 or lower
 if [[ ${OSVERSION} -lt 8 ]]; then
@@ -22,7 +25,7 @@ elif [[ ${OSVERSION} -lt 13 ]]; then
         echo "Error: Caching metrics database not found! Is caching turned on?"
 
     else
-        /usr/bin/sqlite3 /Library/Server/Caching/Logs/Metrics.sqlite "SELECT * FROM statsData;" > /usr/local/munki/preflight.d/cache/caching.txt
+        /usr/bin/sqlite3 /Library/Server/Caching/Logs/Metrics.sqlite "SELECT * FROM statsData;" > ${CACHEDIR}caching.txt
     fi
 
 # Everything else, ie OS version is 13 or higher
@@ -54,6 +57,6 @@ SELECT ZCREATIONDATE AS collectiondateepoch, ZREQUESTSFROMPEER AS requestsfrompe
     fi
         
     # Write the two JSON file to disk after merging them and include the datestamp
-    echo "${CACHINGOUTPUT//\}\}]{\"results\":\{/,\"rundate\":$DATE,\"exact_metrics\":${EXACT_METRICS},}" > /usr/local/munki/preflight.d/cache/caching.txt
+    echo "${CACHINGOUTPUT//\}\}]{\"results\":\{/,\"rundate\":$DATE,\"exact_metrics\":${EXACT_METRICS},}" > ${CACHEDIR}caching.txt
 
 fi
