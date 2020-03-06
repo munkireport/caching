@@ -57,6 +57,6 @@ SELECT ZCREATIONDATE AS collectiondateepoch, ZREQUESTSFROMPEER AS requestsfrompe
     fi
         
     # Write the two JSON file to disk after merging them and include the datestamp
-    echo "${CACHINGOUTPUT//\}\}]{\"results\":\{/,\"rundate\":$DATE,\"exact_metrics\":${EXACT_METRICS},}" > ${CACHEDIR}caching.txt
+    printf "${CACHINGOUTPUT//\}\}]{\"results\":\{/,\"rundate\":$DATE,\"exact_metrics\":${EXACT_METRICS},}" > ${CACHEDIR}caching.txt
 
 fi
