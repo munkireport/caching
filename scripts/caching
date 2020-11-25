@@ -6,20 +6,20 @@ if [ "$1" = 'manualcheck' ]; then
 	exit 0
 fi
 
-# OS check
-OSVERSION=$(/usr/bin/sw_vers -productVersion | /usr/bin/cut -d . -f 2)
+# OS check using Darwin version
+DARWINVERSION=$(/usr/bin/uname -r | /usr/bin/cut -d . -f 1)
 CWD=$(dirname $0)
 CACHEDIR="$CWD/cache/"
 
 
-# If OS version is 10.7 or lower
-if [[ ${OSVERSION} -lt 8 ]]; then
+# If Darwin versin is 11 (OS X 10.7) or lower
+if [[ ${DARWINVERSION} -le 11 ]]; then
 
     echo "Error: Caching module is only supported on 10.8 or higher"
     exit
     
-# If OS version is 10.12 or lower
-elif [[ ${OSVERSION} -lt 13 ]]; then
+# If Darwin versin is 16 (macOS 10.12) or lower
+elif [[ ${DARWINVERSION} -le 16 ]]; then
 
     if [ ! -f /Library/Server/Caching/Logs/Metrics.sqlite ]; then
         echo "Error: Caching metrics database not found! Is caching turned on?"
@@ -28,7 +28,7 @@ elif [[ ${OSVERSION} -lt 13 ]]; then
         /usr/bin/sqlite3 /Library/Server/Caching/Logs/Metrics.sqlite "SELECT * FROM statsData;" > ${CACHEDIR}caching.txt
     fi
 
-# Everything else, ie OS version is 13 or higher
+# Everything else, i.e. Darwin versin is 17 (macOS 10.13) or higher
 else
 
     # Get caching server data
