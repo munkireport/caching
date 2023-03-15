@@ -1,12 +1,5 @@
 {
     "name": "munkireport/caching",
     "description": "Caching module for munkireport.",
-<<<<<<< HEAD
     "license": "MIT"
-=======
-    "license": "MIT",
-    "require": {
-        "php":"^7.0"
-    }
->>>>>>> parent of 3dfdbca (update styles to reflect bootstrap 4 changes in MunkiReport-PHP v6.0.0-beta.1)
 }
