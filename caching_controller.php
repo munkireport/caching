@@ -187,8 +187,10 @@ class Caching_controller extends Module_controller
             // Get the legacy/10.13.4+ data
             $caching_tab_legacy = $queryobj->query($sql);
             
-            // Push the new 10.13+ data into the legacy/10.13.4+ array
-            array_push($caching_tab_legacy,$caching_tab_new[0]);
+            if (array_key_exists(0, $caching_tab_new)){
+                // Push the new 10.13+ data into the legacy/10.13.4+ array if we have 10.13+ data
+                array_push($caching_tab_legacy,$caching_tab_new[0]);
+            }
             
             // Reverse the array so that the 10.13+ data is at the top
             $caching_tab = array_reverse($caching_tab_legacy);
