@@ -76,7 +76,7 @@ class Caching_model extends \Model
      **/
     public function get_reachable_cache_name()
     {
-        $sql = "SELECT COUNT(CASE WHEN reachability <> '' AND reachability IS NOT NULL THEN 1 END) AS count, reachability
+        $sql = "SELECT COUNT(CASE WHEN reachability <> '' AND reachability IS NOT NULL THEN 1 END) AS count, reachability 
                 FROM caching
                 LEFT JOIN reportdata USING (serial_number)
                 ".get_machine_group_filter()."
@@ -120,7 +120,7 @@ class Caching_model extends \Model
                 $cache_line = explode("|", $line);
 
                 if (! empty($line)) {
-                      $cache_array[(str_replace(".", "", $cache_line[3]))] = $cache_line[4];
+                      $cache_array[(str_replace(".", "", $cache_line[3]))] = $cache_line[4]; 
                       $i++;
 
                     if ( $i == 22 ) {
@@ -142,7 +142,7 @@ class Caching_model extends \Model
                             $i=1;
                         } else {
                             // If data is older than 31 days, skip it
-                            $i=1;
+                            $i=1; 
                         }
                     }
                 }
@@ -151,7 +151,7 @@ class Caching_model extends \Model
 
             // Delete previous entries, bye bye data
             $this->deleteWhere('serial_number=?', $this->serial_number);
-                    
+
             // Process JSON into PHP object thingy
             $cachingjson = json_decode($data, true);
 
@@ -206,7 +206,7 @@ class Caching_model extends \Model
             // Traverse the caching object with translations
             foreach ($translate as $search => $field) { 
 
-                if (! is_array($cachingjson[0]["result"])){
+                if (! is_array($cachingjson) || ! array_key_exists(0, $cachingjson) || ! is_array($cachingjson[0]["result"])){
                     // If not an array, null the field
                     $this->$field = '';
 
@@ -226,7 +226,7 @@ class Caching_model extends \Model
                 } else if (! empty($cachingjson[0]["result"][$search]) && ! is_array($cachingjson[0]["result"][$search])) {
                     // If key is not empty, save it to the object
                     $this->$field = $cachingjson[0]["result"][$search];
-
+                    
                 } else if (is_array($cachingjson[0]["result"][$search]) && ! in_array($field, $nestedarrays) && ! empty($cachingjson[0]["result"][$search])){
                     // If is an array and not a nested array, and is not empty, condense it to a string and save it
                     $this->$field = implode(", ", $cachingjson[0]["result"][$search]);
@@ -247,13 +247,13 @@ class Caching_model extends \Model
                 } else if ($cachingjson[0]["result"][$search] == "0" && ! is_array($cachingjson[0]["result"][$search])){
                     // Set the value to 0 if it's 0
                     $this->$field = "0";
-                } else {  
+                } else {
                     // Else, null the value
                     $this->$field = '';
                 }
             }
 
-            if(array_key_exists(0, $cachingjson) && $cachingjson[0]["result"]['exact_metrics']){
+            if(is_array($cachingjson) && array_key_exists(0, $cachingjson) && is_array($cachingjson[0]["result"]) && array_key_exists('exact_metrics', $cachingjson[0]["result"]) && $cachingjson[0]["result"]['exact_metrics']){
                 $this->expirationdate = -1;
             }
 
@@ -262,7 +262,7 @@ class Caching_model extends \Model
             $this->create();
 
             // Process exact_metrics, if it exists
-            if($cachingjson[0]["result"]['exact_metrics']){
+            if(is_array($cachingjson) && array_key_exists(0, $cachingjson) && is_array($cachingjson[0]["result"]) && array_key_exists('exact_metrics', $cachingjson[0]["result"]) && $cachingjson[0]["result"]['exact_metrics']){
                 $pastThirtyone = (time()-2678400);
                 // Split entries into array
                 $exact_array = explode("__", $cachingjson[0]["result"]['exact_metrics']);
