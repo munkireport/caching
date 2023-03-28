@@ -206,7 +206,7 @@ class Caching_model extends \Model
             // Traverse the caching object with translations
             foreach ($translate as $search => $field) { 
 
-                if (! is_array($cachingjson) || ! array_key_exists(0, $cachingjson) || ! is_array($cachingjson[0]["result"])){
+                if (is_null($cachingjson) || ! is_array($cachingjson) || ! array_key_exists(0, $cachingjson) || ! is_array($cachingjson[0]["result"])){
                     // If not an array, null the field
                     $this->$field = '';
 
