@@ -206,11 +206,11 @@ class Caching_model extends \Model
             // Traverse the caching object with translations
             foreach ($translate as $search => $field) { 
 
-                if (is_null($cachingjson) || ! is_array($cachingjson) || ! array_key_exists(0, $cachingjson) || ! is_array($cachingjson[0]["result"])){
+                if ((is_null($cachingjson) || ! is_array($cachingjson) || ! array_key_exists(0, $cachingjson) || ! is_array($cachingjson[0]["result"])) && ! in_array($field, $booleans)){
                     // If not an array, null the field
                     $this->$field = '';
 
-                } else if (! array_key_exists($search, $cachingjson[0]["result"])){
+                } else if (! array_key_exists($search, $cachingjson[0]["result"]) && ! in_array($field, $booleans)){
                     // Skip keys that may not exist and null the value
                     $this->$field = '';
 
@@ -219,7 +219,7 @@ class Caching_model extends \Model
                     // Send a 1 to the db
                     $this->$field = '1';
 
-                } else if (in_array($field, $booleans) && ($cachingjson[0]["result"][$search] == "false" || $cachingjson[0]["result"][$search] == "0")) {
+                } else if (in_array($field, $booleans) && ($cachingjson[0]["result"][$search] == "false" || $cachingjson[0]["result"][$search] == "0" || $cachingjson[0]["result"][$search] == "")) {
                     // Send a 0 to the db
                     $this->$field = '0';
 
