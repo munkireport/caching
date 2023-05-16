@@ -1,12 +1,12 @@
 <div class="col-lg-4 col-md-6">
-	<div class="card" id="caching-software-widget">
-		<div class="card-header" data-container="body">
-			<i class="fa fa-cubes"></i>
+	<div class="panel panel-default" id="caching-software-widget">
+		<div class="panel-heading" data-container="body">
+			<h3 class="panel-title"><i class="fa fa-cubes"></i>
 			    <span data-i18n="caching.widget_software_title"></span>
-			    <a href="/show/listing/caching/caching" class="pull-right"><i class="fa fa-list"></i></a>
-			
+			    <list-link data-url="/show/listing/caching/caching"></list-link>
+			</h3>
 		</div>
-		<div class="card-body text-center"></div>
+		<div class="panel-body text-center"></div>
 	</div><!-- /panel -->
 </div><!-- /col -->
 
@@ -20,7 +20,7 @@ $(document).on('appUpdate', function(e, lang) {
     		return;
     	}
 
-		var panel = $('#caching-software-widget div.card-body'),
+		var panel = $('#caching-software-widget div.panel-body'),
 		baseUrl = appUrl + '/show/listing/caching/caching';
 		panel.empty();
 
