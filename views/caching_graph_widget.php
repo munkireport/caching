@@ -1,12 +1,12 @@
 <div class="col-sm-12">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title"><i class="fa fa-database"></i>
+	<div class="card">
+		<div class="card-header">
+			<i class="fa fa-database"></i>
 			    <span data-i18n="caching.widget_title"></span>
-			    <list-link data-url="/show/listing/caching/caching"></list-link>
-			</h3>
+			    <a href="/show/listing/caching/caching" class="pull-right"><i class="fa fa-list"></i></a>
+			
 		</div>
-		<div class="panel-body">
+		<div class="card-body">
 			<svg id="cachingchart" style="width: 100%; height: 400px"></svg>
 		</div>
 	</div><!-- /panel -->

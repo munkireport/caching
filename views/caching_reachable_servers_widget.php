@@ -1,10 +1,10 @@
 	<div class="col-lg-4 col-md-6">
-	<div class="panel panel-default" id="caching-reachable-servers-widget">
-		<div class="panel-heading" data-container="body" >
-			<h3 class="panel-title"><i class="fa fa-hand-lizard-o"></i>
+	<div class="card" id="caching-reachable-servers-widget">
+		<div class="card-header" data-container="body" >
+			<i class="fa fa-hand-lizard-o"></i>
 			    <span data-i18n="caching.widget_reachable_servers"></span>
-			    <list-link data-url="/show/listing/caching/caching"></list-link>
-			</h3>
+			    <a href="/show/listing/caching/caching" class="pull-right"><i class="fa fa-list"></i></a>
+			
 		</div>
 		<div class="list-group scroll-box"></div>
 	</div><!-- /panel -->
