@@ -1,12 +1,12 @@
 <div class="col-lg-4 col-md-6">
-	<div class="panel panel-default" id="caching-icloud-widget">
-		<div class="panel-heading" data-container="body">
-			<h3 class="panel-title"><i class="fa fa-cloud"></i>
+	<div class="card" id="caching-icloud-widget">
+		<div class="card-header" data-container="body">
+			<i class="fa fa-cloud"></i>
 			    <span data-i18n="caching.widget_icloud_title"></span>
-			    <list-link data-url="/show/listing/caching/caching"></list-link>
-			</h3>
+			    <a href="/show/listing/caching/caching" class="pull-right"><i class="fa fa-list"></i></a>
+			
 		</div>
-		<div class="panel-body text-center"></div>
+		<div class="card-body text-center"></div>
 	</div><!-- /panel -->
 </div><!-- /col -->
 
@@ -20,7 +20,7 @@ $(document).on('appUpdate', function(e, lang) {
     		return;
     	}
 
-		var panel = $('#caching-icloud-widget div.panel-body'),
+		var panel = $('#caching-icloud-widget div.card-body'),
 		baseUrl = appUrl + '/show/listing/caching/caching';
 		panel.empty();
 
