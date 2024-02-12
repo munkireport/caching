@@ -1,0 +1,20 @@
+i18n_title: caching.reporttitle_legacy
+js_link: module/caching/js/caching
+not_null_column: caching.collectiondateepoch
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: tab_caching-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - {i18n_header: caching.date, column: caching.collectiondateepoch, formatter: timestampToMoment}
+  - {i18n_header: caching.bytesfromcachetoclients, column: caching.bytesfromcachetoclients, formatter: caching_fileSize}
+  - {i18n_header: caching.bytesfrompeerstoclients, column: caching.bytesfrompeerstoclients, formatter: caching_fileSize}
+  - {i18n_header: caching.bytesfromorigintoclients, column: caching.bytesfromorigintoclients, formatter: caching_fileSize}
+  - {i18n_header: caching.requestsfrompeers, column: caching.requestsfrompeers, formatter: caching_fileSize}
+  - {i18n_header: caching.requestsfromclients, column: caching.requestsfromclients, formatter: caching_fileSize}
+  - {i18n_header: caching.purged_1, column: caching.bytespurgedyoungerthan1day, formatter: caching_fileSize}
+  - {i18n_header: caching.purged_7, column: caching.bytespurgedyoungerthan7days, formatter: caching_fileSize}
+  - {i18n_header: caching.purged_30, column: caching.bytespurgedyoungerthan30days, formatter: caching_fileSize}
+  - {i18n_header: caching.total_purged, column: caching.bytespurgedtotal, formatter: caching_fileSize}

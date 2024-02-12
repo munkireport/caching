@@ -23,7 +23,6 @@ class Caching extends Migration
             $migrateData = true;
         }
 
-
         $capsule::schema()->create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('serial_number')->nullable();
@@ -99,7 +98,7 @@ class Caching extends Migration
             $table->index('bytesfromorigintoclients');
         });
     }
-    
+
     public function down()
     {
         $capsule = new Capsule();

@@ -3,15 +3,21 @@ Caching module
 
 Get status of macOS' caching service. 
 
-###Now supports macOS High Sierra! Can be installed on all 10.13+ clients.
+Configuration
+-------------
 
-##Config Options
+Legacy Caching Listing
 
-Because of the drastic change in how the caching data is stored between 10.8-10.12 and 10.13+, the listing was completely rewritten. The older, itemized listing is still available under the "Caching Itemized" listing. To hide the Itemized listing, set the config option "caching_show_itemized" to FALSE.
-
+Starting with 10.13, Apple changed the caching server. In MunkiReport,
+you can hide the legacy caching server listing that shows an itemized
+listing for all caching server transactions for caching servers running
+10.8-10.12. To hide the "Caching (Legacy)" listing, set this to FALSE.
+```
+CACHING_SHOW_ITEMIZED=FALSE
+```
  
-## Database Columns
-The results are stored in the table:
+Table Schema
+-----
 
 * id - Unique id
 * serial_number - Serial Number
@@ -82,15 +88,4 @@ The results are stored in the table:
 * totalbytesstoredfrompeers - Total number of bytes stored from peers
 * reachability - IP address and port of caching servers that clients can reach
 
-Configuration
--------------
 
-Legacy Caching Listing
-
-Starting with 10.13, Apple changed the caching server. In MunkiReport,
-you can hide the legacy caching server listing that shows an itemized
-listing for all caching server transactions for caching servers running
-10.8-10.12. To hide the "Caching (Legacy)" listing, set this to FALSE.
-```
-CACHING_SHOW_ITEMIZED=FALSE
-```

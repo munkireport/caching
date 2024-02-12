@@ -2,8 +2,8 @@
 
 # Skip manual check
 if [ "$1" = 'manualcheck' ]; then
-	echo 'Manual check: skipping'
-	exit 0
+    echo 'Manual check: skipping'
+    exit 0
 fi
 
 # OS check using Darwin version
@@ -17,7 +17,7 @@ if [[ ${DARWINVERSION} -le 11 ]]; then
 
     echo "Error: Caching module is only supported on 10.8 or higher"
     exit
-    
+
 # If Darwin versin is 16 (macOS 10.12) or lower
 elif [[ ${DARWINVERSION} -le 16 ]]; then
 
@@ -33,16 +33,16 @@ else
 
     # Get caching server data
     MANAGER=$(/usr/bin/AssetCacheManagerUtil -aj status 2>/dev/null)
-    
+
     # Get cache locator data
     LOCATOR=$(/usr/bin/AssetCacheLocatorUtil -j 2>/dev/null)
-    
+
     # Merge the two variables as an invalid JSON
     CACHINGOUTPUT="${MANAGER}${LOCATOR}]"
-    
+
     # Get epoch date
     DATE=$(date +%s)
-    
+
     if [[ -f '/Library/Application Support/Apple/AssetCache/Metrics/Metrics.db' ]] ; then
         # Exact Metrics, only available on 10.13.4 and higher
         EXACT_METRICS=$(/usr/bin/sqlite3 "/Library/Application Support/Apple/AssetCache/Metrics/Metrics.db" <<!
@@ -55,7 +55,7 @@ SELECT ZCREATIONDATE AS collectiondateepoch, ZREQUESTSFROMPEER AS requestsfrompe
     else
         EXACT_METRICS='""'
     fi
-        
+
     # Write the two JSON file to disk after merging them and include the datestamp
     printf "${CACHINGOUTPUT//\}\}]{\"results\":\{/,\"rundate\":$DATE,\"exact_metrics\":${EXACT_METRICS},}" > ${CACHEDIR}caching.txt
 
