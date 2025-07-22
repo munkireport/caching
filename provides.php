@@ -1,5 +1,7 @@
 <?php
 
+// Do not YAML-ize this file. It needs the PHP goodnesss to show different views based on config
+
 // Add local config
 configAppendFile(__DIR__ . '/config.php');
 
@@ -22,11 +24,11 @@ if (!conf('caching_show_itemized')) {
             'caching_reachable_servers' => array('view' => 'caching_reachable_servers_widget'),
         ),
         'reports' => array(
-            'caching' => array('view' => 'server', 'i18n' => 'caching.reporttitle'),
+            'caching' => array('view' => 'caching_report', 'i18n' => 'caching.reporttitle'),
         ),
     );
-} else { 
-    
+} else {
+
     return array(
         'client_tabs' => array(
             'caching-tab' => array('view' => 'caching_tab', 'i18n' => 'caching.client_tab_title'),
@@ -45,7 +47,7 @@ if (!conf('caching_show_itemized')) {
             'caching_reachable_servers' => array('view' => 'caching_reachable_servers_widget'),
         ),
         'reports' => array(
-            'caching' => array('view' => 'server', 'i18n' => 'caching.reporttitle'),
+            'caching' => array('view' => 'caching_report', 'i18n' => 'caching.reporttitle'),
         ),
     );
 }

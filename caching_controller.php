@@ -27,22 +27,31 @@ class Caching_controller extends Module_controller
     }
 
     /**
-     * Retrieve data in json format
+     * Get data for scroll widget
      *
      * @return void
      * @author tuxudo
      **/
-    public function get_data($serial_number = '')
+    public function get_reachable_cache_name()
     {
-        $obj = new View();
+        $sql = "SELECT COUNT(CASE WHEN reachability <> '' AND reachability IS NOT NULL THEN 1 END) AS count, reachability 
+                FROM caching
+                LEFT JOIN reportdata USING (serial_number)
+                ".get_machine_group_filter()."
+                GROUP BY reachability
+                ORDER BY count DESC";
 
-        if (! $this->authorized()) {
-            $obj->view('json', array('msg' => 'Not authorized'));
-            return;
+        $queryobj = new Caching_model;
+        
+        $out = [];
+        foreach ($queryobj->query($sql) as $obj) {
+            if ("$obj->count" !== "0") {
+                $obj->reachability = $obj->reachability ? $obj->reachability : 'Unknown';
+                $out[] = $obj;
+            }
         }
 
-        $caching = new Caching_model;
-        $obj->view('json', array('msg' => $caching->retrieve_records($serial_number)));
+        jsonView($out);
     }
 
      /**
@@ -63,7 +72,7 @@ class Caching_controller extends Module_controller
         }
 
         $queryobj = new Caching_model();
-        
+
         // Check which version of data to return
         $sqlcheck = "SELECT startupstatus, expirationdate
                         FROM caching
@@ -111,7 +120,9 @@ class Caching_controller extends Module_controller
                             totalbytesdropped AS 'totalbytesdropped',
                             totalbytesimported AS 'totalbytesimported'
                             FROM caching 
-                            WHERE serial_number = '$serial_number'";
+                            LEFT JOIN reportdata USING (serial_number)
+                            ".get_machine_group_filter()."
+                            AND serial_number = '$serial_number'";
 
             $caching_tab = $queryobj->query($sql);
 
@@ -155,7 +166,9 @@ class Caching_controller extends Module_controller
                             totalbytesdropped AS 'totalbytesdropped',
                             totalbytesimported AS 'totalbytesimported'
                             FROM caching
-                            WHERE serial_number = '$serial_number' AND activated <> ''";
+                            LEFT JOIN reportdata USING (serial_number)
+                            ".get_machine_group_filter()."
+                            AND serial_number = '$serial_number' AND activated <> ''";
 
             // Get the new 10.13+ data
             $caching_tab_new = $queryobj->query($sql);
@@ -183,7 +196,9 @@ class Caching_controller extends Module_controller
                             SUM(importsbyhttp) AS 'importsbyhttp',
                             SUM(importsbyxpc) AS 'importsbyxpc'
                             FROM caching
-                            WHERE serial_number = '$serial_number' AND collectiondate <> '' 
+                            LEFT JOIN reportdata USING (serial_number)
+                            ".get_machine_group_filter()."
+                            AND serial_number = '$serial_number' AND collectiondate <> '' 
                             GROUP BY groupdate
                             ORDER BY groupdate ASC";
 
@@ -224,7 +239,9 @@ class Caching_controller extends Module_controller
                             SUM(importsbyhttp) AS 'importsbyhttp',
                             SUM(importsbyxpc) AS 'importsbyxpc'
                             FROM caching 
-                            WHERE serial_number = '$serial_number'
+                            LEFT JOIN reportdata USING (serial_number)
+                            ".get_machine_group_filter()."
+                            AND serial_number = '$serial_number'
                             GROUP BY groupdate
                             ORDER BY groupdate DESC";
 
@@ -238,7 +255,7 @@ class Caching_controller extends Module_controller
     /**
      * REST API for retrieving caching data for chart
      * @tuxudo
-     * 
+     *
      **/
     public function caching_graph()
     {
@@ -455,20 +472,21 @@ class Caching_controller extends Module_controller
      }
 
     /**
-     * Get reachability IP address for widget
-     * @tuxudo
+     * Retrieve data in json format
      *
+     * @return void
+     * @author tuxudo
      **/
-    public function get_reachable_cache_name()
+    public function get_data($serial_number = '')
     {
         $obj = new View();
+
         if (! $this->authorized()) {
-            $obj->view('json', array('msg' => array('error' => 'Not authenticated')));
+            $obj->view('json', array('msg' => 'Not authorized'));
             return;
         }
 
-        $cache = new Caching_model;
-        $obj->view('json', array('msg' => $cache->get_reachable_cache_name()));
+        $caching = new Caching_model;
+        $obj->view('json', array('msg' => $caching->retrieve_records($serial_number)));
     }
-
 } // END class Caching_controller

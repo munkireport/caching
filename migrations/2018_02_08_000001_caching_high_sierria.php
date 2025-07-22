@@ -10,7 +10,7 @@ class CachingHighSierria extends Migration
     public function up()
     {
         $capsule = new Capsule();
-    
+
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
             $table->integer('activated')->nullable();
             $table->integer('active')->nullable();
@@ -60,47 +60,47 @@ class CachingHighSierria extends Migration
             $table->index('totalbytesstoredfrompeers');
         });
      }
-    
+
     public function down()
     {
         $capsule = new Capsule();
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
-			$table->dropColumn('activated');
-			$table->dropColumn('active');
-			$table->dropColumn('cachestatus');
-			$table->dropColumn('appletvsoftware');
-			$table->dropColumn('macsoftware');
-			$table->dropColumn('iclouddata');
-			$table->dropColumn('iossoftware');
-			$table->dropColumn('booksdata');
-			$table->dropColumn('itunesudata');
-			$table->dropColumn('moviesdata');
-			$table->dropColumn('musicdata');
-			$table->dropColumn('otherdata');
-			$table->dropColumn('cachefree');
-			$table->dropColumn('cachelimit');
-			$table->dropColumn('cacheused');
-			$table->dropColumn('personalcachefree');
-			$table->dropColumn('personalcachelimit');
-			$table->dropColumn('personalcacheused');
-			$table->dropColumn('port');
-			$table->dropColumn('publicaddress');
-			$table->dropColumn('privateaddresses');
-			$table->dropColumn('registrationstatus');
-			$table->dropColumn('registrationerror');
-			$table->dropColumn('registrationresponsecode');
-			$table->dropColumn('restrictedmedia');
-			$table->dropColumn('serverguid');
-			$table->dropColumn('startupstatus');
-			$table->dropColumn('totalbytesdropped');
-			$table->dropColumn('totalbytesimported');
-			$table->dropColumn('totalbytesreturnedtochildren');
-			$table->dropColumn('totalbytesreturnedtoclients');
-			$table->dropColumn('totalbytesreturnedtopeers');
-			$table->dropColumn('totalbytesstoredfromorigin');
-			$table->dropColumn('totalbytesstoredfromparents');
-			$table->dropColumn('totalbytesstoredfrompeers');
-			$table->dropColumn('reachability');
+            $table->dropColumn('activated');
+            $table->dropColumn('active');
+            $table->dropColumn('cachestatus');
+            $table->dropColumn('appletvsoftware');
+            $table->dropColumn('macsoftware');
+            $table->dropColumn('iclouddata');
+            $table->dropColumn('iossoftware');
+            $table->dropColumn('booksdata');
+            $table->dropColumn('itunesudata');
+            $table->dropColumn('moviesdata');
+            $table->dropColumn('musicdata');
+            $table->dropColumn('otherdata');
+            $table->dropColumn('cachefree');
+            $table->dropColumn('cachelimit');
+            $table->dropColumn('cacheused');
+            $table->dropColumn('personalcachefree');
+            $table->dropColumn('personalcachelimit');
+            $table->dropColumn('personalcacheused');
+            $table->dropColumn('port');
+            $table->dropColumn('publicaddress');
+            $table->dropColumn('privateaddresses');
+            $table->dropColumn('registrationstatus');
+            $table->dropColumn('registrationerror');
+            $table->dropColumn('registrationresponsecode');
+            $table->dropColumn('restrictedmedia');
+            $table->dropColumn('serverguid');
+            $table->dropColumn('startupstatus');
+            $table->dropColumn('totalbytesdropped');
+            $table->dropColumn('totalbytesimported');
+            $table->dropColumn('totalbytesreturnedtochildren');
+            $table->dropColumn('totalbytesreturnedtoclients');
+            $table->dropColumn('totalbytesreturnedtopeers');
+            $table->dropColumn('totalbytesstoredfromorigin');
+            $table->dropColumn('totalbytesstoredfromparents');
+            $table->dropColumn('totalbytesstoredfrompeers');
+            $table->dropColumn('reachability');
         });
     }
 }

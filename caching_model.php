@@ -56,7 +56,7 @@ class Caching_model extends \Model
         $this->rs['registrationresponsecode'] = "";
         $this->rs['restrictedmedia'] = 0;
         $this->rs['serverguid'] = "";
-        $this->rs['startupstatus'] = "";
+        $this->rs['startupstatus'] = null;
         $this->rs['totalbytesdropped'] = 0;
         $this->rs['totalbytesimported'] = 0;
         $this->rs['totalbytesreturnedtochildren'] = 0;
@@ -268,8 +268,9 @@ class Caching_model extends \Model
                 $exact_array = explode("__", $cachingjson[0]["result"]['exact_metrics']);
                 // Process each entry
                 foreach($exact_array as $metric){
-                    // Make sure entry isn't empty
-                    if (! empty($metric)) {
+                    // Make sure entry isn't empty and not _
+                    if (! empty($metric) && $metric !== "_") {
+
                         // Split entry
                         $metric_array = explode(",",$metric);
 
