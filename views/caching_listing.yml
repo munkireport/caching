@@ -1,0 +1,37 @@
+i18n_title: caching.reporttitle
+js_link: module/caching/js/caching
+not_null_column: caching.startupstatus
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: tab_caching-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - {i18n_header: caching.activated, column: caching.activated, formatter: binaryYesNo}
+  - {i18n_header: caching.active, column: caching.active, formatter: binaryYesNo}
+  - {i18n_header: caching.cachestatus, column: caching.cachestatus}
+  - {i18n_header: caching.reachability, column: caching.reachability}
+  - {i18n_header: caching.cachefree, column: caching.cachefree, formatter: caching_fileSize}
+  - {i18n_header: caching.cacheused, column: caching.cacheused, formatter: caching_fileSize}
+  - {i18n_header: caching.cachelimit, column: caching.cachelimit, formatter: caching_fileSize}
+  - {i18n_header: caching.startupstatus, column: caching.startupstatus, formatter: caching_startupStatus}
+  - {i18n_header: caching.registrationstatus, column: caching.registrationstatus, formatter: caching_regStatus}
+  - {i18n_header: caching.publicaddress, column: caching.publicaddress}
+  - {i18n_header: caching.privateaddresses, column: caching.privateaddresses}
+  - {i18n_header: caching.macsoftware, column: caching.macsoftware, formatter: caching_fileSize}
+  - {i18n_header: caching.appletvsoftware, column: caching.appletvsoftware, formatter: caching_fileSize}
+  - {i18n_header: caching.iossoftware, column: caching.iossoftware, formatter: caching_fileSize}
+  - {i18n_header: caching.iclouddata, column: caching.iclouddata, formatter: caching_fileSize}
+  - {i18n_header: caching.booksdata, column: caching.booksdata, formatter: caching_fileSize}
+  - {i18n_header: caching.itunesudata, column: caching.itunesudata, formatter: caching_fileSize}
+  - {i18n_header: caching.moviesdata, column: caching.moviesdata, formatter: caching_fileSize}
+  - {i18n_header: caching.musicdata, column: caching.musicdata, formatter: caching_fileSize}
+  - {i18n_header: caching.otherdata, column: caching.otherdata, formatter: caching_fileSize}
+  - {i18n_header: caching.serverguid, column: caching.serverguid}
+  - {i18n_header: caching.totalbytesreturnedtoclients, column: caching.totalbytesreturnedtoclients, formatter: caching_fileSize}
+  - {i18n_header: caching.totalbytesreturnedtopeers, column: caching.totalbytesreturnedtopeers, formatter: caching_fileSize}
+  - {i18n_header: caching.totalbytesstoredfromorigin, column: caching.totalbytesstoredfromorigin, formatter: caching_fileSize}
+  - {i18n_header: caching.totalbytesstoredfrompeers, column: caching.totalbytesstoredfrompeers, formatter: caching_fileSize}
+  - {i18n_header: caching.totalbytesdropped, column: caching.totalbytesdropped, formatter: caching_fileSize}
+  - {i18n_header: caching.totalbytesimported, column: caching.totalbytesimported, formatter: caching_fileSize}

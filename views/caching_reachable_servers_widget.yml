@@ -1,0 +1,9 @@
+type: scrollbox
+widget_id: caching-reachable-servers-widget
+api_url: /module/caching/get_reachable_cache_name
+i18n_title: caching.widget_reachable_servers
+icon: fa-hand-lizard-o
+listing_link: /show/listing/caching/caching
+search_key: reachability
+i18n_empty_result: caching.noservers
+badge: count

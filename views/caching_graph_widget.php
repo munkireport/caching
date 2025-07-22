@@ -1,15 +1,15 @@
 <div class="col-sm-12">
-	<div class="card">
-		<div class="card-header">
-			<i class="fa fa-database"></i>
-			    <span data-i18n="caching.widget_title"></span>
-			    <a href="/show/listing/caching/caching" class="pull-right"><i class="fa fa-list"></i></a>
-			
-		</div>
-		<div class="card-body">
-			<svg id="cachingchart" style="width: 100%; height: 400px"></svg>
-		</div>
-	</div><!-- /panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-database"></i>
+                <span data-i18n="caching.widget_title"></span>
+                <list-link data-url="/show/listing/caching/caching"></list-link>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <svg id="cachingchart" style="width: 100%; height: 400px"></svg>
+        </div>
+    </div><!-- /panel -->
 
 </div><!-- /col-lg-4 -->
 
@@ -21,24 +21,24 @@ $(document).on('appReady', function() {
     var data;
 
     d3.json(url, function(err, data){
-                
+
         function graphData() {
-            
+
             var cache = [],
                 origin = [],
                 purged = []
                 graphData = [],
                 datelength = data.dates.length;
-            
+
             for (var i = 1; i < datelength ; i++) {
                 origin.push({x: (new Date(data.dates[i])), y: data.origin[i]});
                 purged.push({x: (new Date(data.dates[i])), y: data.purged[i]});
                 cache.push({x: (new Date(data.dates[i])), y: data.cache[i]});
             }
-            
+
 //            alert(JSON.stringify(origin));
 //            alert(moment(data.dates[i]).add(1, 'day'));
-            
+
             return [
                 {
                     values: cache,
@@ -62,28 +62,28 @@ $(document).on('appReady', function() {
         }
 
         nv.addGraph(function() {
-                
+
             chart = nv.models.lineChart()
                 .useInteractiveGuideline(true)
                 .duration(300);
-            
-			chart.xAxis.tickFormat(function(d, e) {
-				if(e == undefined){ return d }
-				return moment(d).format("MMMM DD");
-			});
-            
+
+            chart.xAxis.tickFormat(function(d, e) {
+                if(e == undefined){ return d }
+                return moment(d).format("MMMM DD");
+            });
+
             chart.yAxis.tickFormat(function(d, e) {
-				if(e == undefined){ return d }
-				return fileSize(d, 2);
-			});
+                if(e == undefined){ return d }
+                return fileSize(d, 2);
+            });
 
             chart.xAxis.showMaxMin(false);
             chart.yAxis.showMaxMin(false);
 
             var tooltip = chart.interactiveLayer.tooltip;
-			tooltip.headerFormatter(function (d) {
-				return moment(d).format("MMMM DD");
-			});
+            tooltip.headerFormatter(function (d) {
+                return moment(d).format("MMMM DD");
+            });
 
             d3.select('#cachingchart')
                 .datum(graphData())
@@ -97,11 +97,10 @@ $(document).on('appReady', function() {
                         })
                     }, 0)
                 });
-            
+
             nv.utils.windowResize(chart.update);
             return chart;
         });
     });
-
 });
 </script>
